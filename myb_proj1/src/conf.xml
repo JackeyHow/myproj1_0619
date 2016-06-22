@@ -14,5 +14,6 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/hjd/test/userMapper.xml"/>
+		<mapper resource="com/hjd/test2/userMapper.xml"/>
 	</mappers>
 </configuration>
