@@ -5,7 +5,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
-import com.hjd.test.User;
+
+import com.hjd.bean.User;
 import com.hjd.utils.MybatisUtil;
 
 public class Test2 {
@@ -72,4 +73,17 @@ public class Test2 {
 		session.close();
 		System.out.println(all);
 	}
+
+/*
+	@Test
+	public void testAdd2(){
+		SqlSessionFactory factory = MybatisUtil.getFactory();
+		SqlSession session = factory.openSession(true);
+		
+		UserMapperIn mapper = session.getMapper(UserMapperIn.class);
+		int result = mapper.add(new User(-1,"Louis", 27));
+		session.close();
+		System.out.println(result);
+	}
+*/
 }

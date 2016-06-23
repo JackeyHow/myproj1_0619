@@ -1,4 +1,4 @@
-package com.hjd.test;
+package com.hjd.bean;
 
 public class User {
 	private int id;
