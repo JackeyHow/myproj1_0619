@@ -5,8 +5,11 @@
 	<!-- 通过properties文件来加载数据配置信息 -->
 	<properties resource="db.properties" />
 	<!-- 配置实体类的别名 -->
-	<typeAliases>
-		<!--  typeAlias type="com.hjd.test.User" alias="_User"/>-->
+	<typeAliases><!-- 
+		<typeAlias type="com.hjd.test.User" alias="_User"/>
+		<typeAlias type="com.hjd.bean.Class" alias="_Class"/>
+		<typeAlias type="com.hjd.bean.Teacher" alias="_Teacher"/>
+		 -->
 		<package name="com.hjd.bean"/>
 	</typeAliases>
 	<environments default="development">
@@ -26,5 +29,8 @@
 		<mapper resource="com/hjd/test2/userMapper.xml"/>
 		<mapper class="com.hjd.test2.UserMapperIn"/>
 		<mapper resource="com/hjd/test3/orderMapper.xml"/>
+		<mapper resource="com/hjd/test4/classMapper.xml"/>
+		<mapper resource="com/hjd/test5/classMapper.xml"/>
+		<mapper resource="com/hjd/test6/userMapper.xml"/>
 	</mappers>
 </configuration>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.hjd.test5.classMapper"> 
+	<!-- 根据班级id查询班级信息，包括学生、老师 -->
+	<!-- SELECT * FROM class WHERE c_id = 1 -->
+	<!-- 方法一：联表查询
+	SELECT * FROM class c,teacher t,student s WHERE c.teacher_id = t.t_id 
+			AND c.c_id = s.class_id AND c.c_id=#{id}
+	 -->
+	<select id="getClass" parameterType="int" resultMap="classMap">
+		SELECT * FROM class c,teacher t, student s WHERE c.c_id = s.class_id AND c.c_id=#{id}
+	</select>
+	<resultMap type="Classes" id="classMap">
+		<id property="id" column="c_id"/>
+		<result property="name" column="c_name"/>
+		<association property="teacher" javaType="Teacher">
+				<id property="id" column="t_id"/>
+				<result property="name" column="t_name"/>
+			</association>
+		<collection property="stdents" ofType="Student">
+			<id property="id" column="s_id"/>
+			<result property="name" column="s_name"/>
+		</collection>
+	</resultMap>
+	<!-- 方法二：
+	使用三条SQL语句
+	 -->
+	<select id="getClass2" resultMap="classMap2">
+		SELECT * FROM class WHERE c_id = #{id}
+	</select>
+	<select id="getTeacher" resultType="Teacher">
+		SELECT t_id id, t_name name FROM teacher WHERE t_id = #{id}
+	</select>
+	<select id="getStudent" resultType="Student">
+		SELECT s_id id, s_name name FROM student WHERE class_id = #{id}
+	</select>
+	<resultMap type="Classes" id="classMap2">
+		<id property="id" column="c_id"/>
+		<result property="name" column="c_name"/>
+		<association property="teacher" column="teacher_id" select="getTeacher" />
+		<collection property="student" column="c_id" select="getStudent"></collection>
+	</resultMap>
+</mapper>
